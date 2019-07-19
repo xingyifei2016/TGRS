@@ -7,7 +7,7 @@ from torch.utils import data
 import complex_new as complex
 import math
 
-
+#This is the network used for 10-class classification task
 class ManifoldNetComplex(nn.Module):
     def __init__(self):
         super(ManifoldNetComplex, self).__init__()
@@ -58,21 +58,9 @@ class ManifoldNetComplex(nn.Module):
 #         x = self.linear_3(x)
 #         x = self.relu(x)
         x = self.linear_4(x)
-         
-        
-#         x = self.complex_conv3(x)
-#         x = self.proj3(x)
-#         #x = self.complex_bn(x)
-#         #print(x.shape)
-#         x = self.complex_conv4(x)
-#         x = self.proj4(x)
-#         x = self.complex_conv5(x)
-#         x = self.proj5(x)
-#         x = self.complex_conv6(x)
-#         x = self.proj6(x)
-#         x = self.complex_fc(x)
         return x
 
+#Helper function for custom manifold net
 def make_complex_layer(complex_c, complex_kern, complex_stride):
     complex_parts = []
     prev_c = 1
@@ -86,7 +74,9 @@ def make_complex_layer(complex_c, complex_kern, complex_stride):
             complex_parts.append(prev_relu)
         prev_c = c             
     return complex_parts, prev_c
-    
+
+
+#Helper function for custom manifold net
 def make_regular_layer(prev_channel, regular_c, regular_kern, regular_stride, max_pool):
     regular_parts = []
     prev_c = prev_channel
@@ -132,7 +122,8 @@ class CustomManifold(nn.Module):
         x = self.linear_3(x)
         
         return x
-        
+
+#This is the model included in the original code, the base model        
 class ManifoldNetAll(nn.Module):
     def __init__(self):
         super(ManifoldNetAll, self).__init__()
@@ -166,7 +157,7 @@ class ManifoldNetAll(nn.Module):
         x = self.complex_fc(x)
         return x
 
-    
+#Network used in visualization
 class TestNet(nn.Module):
     def __init__(self):
         super(TestNet, self).__init__()
@@ -218,7 +209,7 @@ class TestNet(nn.Module):
 
     
     
-
+#Network used for 11-class classification
 class ManifoldNetComplex_11(nn.Module):
     def __init__(self):
         super(ManifoldNetComplex_11, self).__init__()

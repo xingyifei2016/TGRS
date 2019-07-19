@@ -48,8 +48,8 @@ nC11 = 1159
 def data_prep_10(batch_size, split=0.7):
     data_x = []
     data_y = []
-    for f in listdir('../data_polar'):
-        data = np.load(join('../data_polar', f))
+    for f in listdir('/data_polar'):
+        data = np.load(join('/data_polar', f))
         label = f.split('_')[0].split('c')[1]
         if int(label) != 11:
             data_x.append(data)
@@ -170,7 +170,7 @@ logger = setup_logger("Comparison")
 
 
 def index_split(full_or_no):
-    csv_path = '../chipinfo.csv' #os.path.join('./save/', 'split[{split}]-10class-model-temp.ckpt'.format(split=i))
+    csv_path = 'chipinfo.csv' #os.path.join('./save/', 'split[{split}]-10class-model-temp.ckpt'.format(split=i))
     df = pd.read_csv(csv_path)
 
     training = df.loc[df['depression'] == 17]
